@@ -1,0 +1,346 @@
+﻿<h1>Universal Control for Raspberry Pi</h1>
+<p>Configuration Sheet will vary depending upon your project</p>
+
+
+<div id="controlpanel">
+    <!--Start of Control Panel-->
+    <div id="controls">
+        <!--Control Buttons-->
+        <h2>Controls</h2>
+        <div id="btncnt">
+            <button class="btnjs" name="ButtonUp" id="btnUp" style="margin-left:75px; margin-top:10px;">
+                <div class="btnimg divup"></div>
+            </button>
+
+            <p style="margin:0px;">
+                <button class="btnjs" name="ButtonLeft" style="margin:0px 62px 0px 10px;">
+                    <div class="btnimg divleft"></div>
+                </button>
+                <button class="btnst" name="ButtonStop" id="btnstop">
+                    <div style="margin-top: -12px; margin-left: -2px;"><span class="btnstop"> </span></div>
+                </button>
+                <button class="btnjs" name="ButtonRight">
+                    <div class="btnimg divright"></div>
+                </button>
+            </p>
+
+            <button class="btnjs" name="ButtonDown" style="margin-left:75px;">
+                <div class="btnimg divdown"></div>
+            </button>
+        </div>
+
+        <div id="btnrange">
+            <h2>Range Setters</h2>
+            <div id="btnsc">
+                <p>Range1: <input class="sldrclass" id="Slider1" type="range" /><span class="sltxt"></span></p>
+                <p>Range2: <input class="sldrclass" id="Slider2" type="range" /><span class="sltxt"></span></p>
+                <p>Range3: <input class="sldrclass" id="Slider3" type="range" /><span class="sltxt"></span></p>
+            </div>
+        </div>
+
+    </div> <!-- End of Control buttons-->
+
+    <div id="btnport">
+        <!--Start of Port Control Switches-->
+        <h2>Port Switches</h2>
+        <div id="btnioc">
+            <div id="btnsw">
+                <div class="row1">
+                    <button class="btnjs btnsw" value="" name="Switch1"><span class="btnface">1</span></button>
+                    <button class="btnjs btnsw" value="" name="Switch2"><span class="btnface">2</span></button>
+                    <button class="btnjs btnsw" value="" name="Switch3"><span class="btnface">3</span></button>
+                </div>
+                <div class="row2">
+                    <button class="btnjs btnsw" value="" name="Switch4"><span class="btnface">4</span></button>
+                    <button class="btnjs btnsw" value="" name="Switch5"><span class="btnface">5</span></button>
+                    <button class="btnjs btnsw" value="" name="Switch6"><span class="btnface">6</span></button>
+                </div>
+            </div>
+        </div>
+        <h2>Port Setter Switches</h2>
+        <div id="btnpss">
+            <div class="row1">
+                <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter1"><label><span>1</span></label></div>
+                <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter2"><label><span>2</span></label></div>
+                <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter3"><label><span>3</span></label></div>
+            </div>
+            <div class="row2">
+                <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter4"><label><span>4</span></label></div>
+                <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter5"><label><span>5</span></label></div>
+                <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter6"><label><span>6</span></label></div>
+            </div>
+        </div>
+
+    </div><!--End of Control Switches-->
+
+    <div #id="txtcnt">
+        <div id="txt">
+            <form method="post">
+                <p>
+                    <span style="margin-left:10px;">Text1: </span><input type="text" name="TextToPi1" class="txtin" value="" />
+                    <span style="margin-left:10px;">Text2: </span><input type="text" name="TextToPi2" class="txtin" value="" />
+                    <span style="margin-left:10px;">
+                        <input type="submit" class="btnform" value="Submit" name="Submit" style="height:30px; line-height:10px;">
+                    </span>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <div id="logtxt">
+        <p>&nbsp;</p>
+        <p>Last Action: <span id="log"></span></p>
+    </div>
+</div> <!--End of Control Panel-->
+<!--Start of Configuration Panel-->
+<div id="confpanel">
+    <h2>Configuration chart for the switches</h2>
+    <p>Values are hard-coded based on the project</p>
+    <p class="phd">Control Button Configuration</p>
+
+    <table id="conftbl">
+        <tbody>
+            <tr class="trhead">
+                <th class="col1">Control</th>
+                <th class="col2">Action</th>
+                <th class="col3">Pi Port</th>
+                <th class="col4">Value</th>
+                <th class="col5">Remarks</th>
+            </tr>
+            <tr>
+                <td>Up Button</td>
+                <td>Clicked</td>
+                <td>5 &amp; 25 Low<br />
+                    6 &amp; 16 High
+                </td>
+                <td>N/A</td>
+                <td>Navigator Forward</td>
+            </tr>
+            <tr>
+                <td>Down Button</td>
+                <td>Clicked</td>
+                <td>5 &amp; 25 High<br />
+                    6 &amp; 16 Low
+                </td>
+                <td>N/A</td>
+                <td>Navigator Reverse</td>
+            </tr>
+            <tr>
+                <td>Stop Button</td>
+                <td>Clicked</td>
+                <td>5 &amp; 25 Low<br />
+                    6 &amp; 16 Low
+                </td>
+                <td>N/A</td>
+                <td>Navigator Stop</td>
+            </tr>
+            <tr>
+                <td>Left Button</td>
+                <td>Clicked</td>
+                <td>5 &amp; 16 Low<br />
+                    6 &amp; 25 High
+                </td>
+                <td>N/A</td>
+                <td>Navigator Left turn</td>
+            </tr>
+            <tr>
+                <td>Right Button</td>
+                <td>Clicked</td>
+                <td>5 &amp; 16 High<br />
+                    6 &amp; 25 Low
+                </td>
+                <td>N/A</td>
+                <td>Navigator Right turn</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="phd">Port Switches Configuration</p>
+    <table id="conftbl">
+        <tbody>
+            <tr class="trhead">
+                <th class="col1">Control</th>
+                <th class="col2">Action</th>
+                <th class="col3">Pi Port</th>
+                <th class="col4">Value</th>
+                <th class="col5">Remarks</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Clicked</td>
+                <td>9</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Clicked</td>
+                <td>10</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Clicked</td>
+                <td>11</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Clicked</td>
+                <td>12</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Clicked</td>
+                <td>14</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Clicked</td>
+                <td>15</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="phd">Port Setters Configuration</p>
+    <table id="conftbl">
+        <tbody id="confport">
+            <tr class="trhead">
+                <th class="col1">Control</th>
+                <th class="col2">Action</th>
+                <th class="col3">Pi Port</th>
+                <th class="col4">Value</th>
+                <th class="col5">Remarks</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Normal</td>
+                <td>16</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Pressed</td>
+                <td>16</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Normal</td>
+                <td>18</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pressed</td>
+                <td>18</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Normal</td>
+                <td>19</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Pressed</td>
+                <td>19</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Normal</td>
+                <td>20</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Pressed</td>
+                <td>20</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Normal</td>
+                <td>21</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Pressed</td>
+                <td>21</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Normal</td>
+                <td>22</td>
+                <td>Low</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Pressed</td>
+                <td>22</td>
+                <td>High</td>
+                <td>Sample only</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="phd">Range configuration</p>
+    <table id="conftbl">
+        <tbody>
+            <tr class="trhead">
+                <th class="col1">Control</th>
+                <th class="col2">Low</th>
+                <th class="col3">High</th>
+                <th class="col3">Inc</th>
+                <th class="col4">Port</th>
+                <th class="col5">Remarks</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>0</td>
+                <td>100</td>
+                <td>2</td>
+                <td>12 &amp; 13</td>
+                <td>Set Navigator Speed</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>20</td>
+                <td>40</td>
+                <td>0.5</td>
+                <td>3</td>
+                <td>Sample only</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>5</td>
+                <td>50</td>
+                <td>5</td>
+                <td>4</td>
+                <td>Sample only</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div> <!--End of Configuration Panel-->

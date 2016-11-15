@@ -1,0 +1,728 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- Start of the Copy from header.html file -->
+
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <title>PiWebServer</title>
+    <script>
+
+    $(document).ready(function () {
+
+        $(".btnjs").click(function () {
+            var name = this.name;
+            $("#log").text(name + ": Clicked");
+            $.get("", { [name]: "Clicked_Action" }, function (result) {
+                $("#retVal").text(result);
+            });
+        });
+
+        $(".btnin").click(function () {
+            var name = this.name;
+            var ckb = $("input[name=" + name + "]").is(':Checked') ? "Checked_Action" : "UnChecked_Action";
+            $("#log").text(name + ckb);
+
+            //alternatively ->  ckb = $(".btnin::checked").length
+            $.get("", { [name]: ckb }, function (res) {
+                $("#retVal").text(res);
+            });
+        });
+
+        $(".sldrclass").click(function () {
+            var sl = this.id;
+            var val = $("#" + sl).val();
+            $("#" + sl).next().text(val);
+
+            $.get("", { [sl]: val }, function () {
+                $("#log").text(sl + " Value: " + val);
+            });
+
+        })
+
+    });
+
+    </script>
+
+<style>
+
+    /* Start of copy for theme.css file */
+
+     body{
+        background-color:#b4e0b4;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        text-align:center;
+    }
+
+    #controlpanel{
+        max-width:580px;
+        float: left;
+        background-color: #b5eafe;
+        padding:0px 10px;
+    }
+
+    #confpanel{
+        float: left;
+        margin-left:20px;
+        padding:0px 10px;
+        background-color: #eafeb5;
+    }
+
+    #controls {
+        margin:0px 30px 20px 0px; 
+        float:left;
+    }
+    
+    #btncnt {
+        width:220px;
+        height:215px;
+        background-color:#eaeaea;
+        float:left;
+     }
+
+    #btnrange {
+        float:left; 
+        clear:both;
+        width:260px;
+    }
+
+    #btnport {
+        float:left;
+    }
+
+    #btnsc {
+        padding: 10px;
+        background-color: azure;
+    }
+
+    #btnioc{
+         background-color:beige;
+         padding:10px;
+     }
+
+    #btnpss{
+        min-height: 190px;
+        background-color:bisque;
+    }
+
+    #txt{
+        clear:both; 
+        float:left;
+        background-color:cornsilk;
+        margin-top: 20px;
+        padding-right:20px;
+    }
+
+    #logtxt{
+        clear:both;
+    }
+
+    #confport tr:nth-child(even) {
+        background-color:#f57f7f;
+    }
+
+    #confport tr:nth-child(odd) {
+        background-color:#75de75;
+    }
+
+    #btnstop {
+        width:50px;
+        height:50px;
+        margin-right:0px;
+        margin-left:-58px;
+        margin-top:8px;
+        margin-bottom:2px;
+        position:absolute;
+    }
+
+    .sldrclass {
+        width: 140px;
+        height: 20px;
+        vertical-align:middle;
+    }
+
+    .btnjs, .btnst {
+        margin-right: 10px;
+	    width: 64px;
+	    height: 64px;
+	    display: inline-block;
+	    position: relative;
+	    line-height: 64px;
+	    background-color: #eaeaea;
+	    background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eaeaea));
+	    background-image: -webkit-linear-gradient(top, #f6f6f6, #eaeaea);
+	    background-image: -moz-linear-gradient(top, #f6f6f6, #eaeaea); 
+	    background-image: -o-linear-gradient(top, #f6f6f6, #eaeaea);
+	    background-image: linear-gradient(top, #f6f6f6, #eaeaea);
+	    -moz-border-radius: 5px;
+	    -webkit-border-radius: 5px;
+	    border-radius: 5px;
+	    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+	    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+	    box-shadow: 0 1px 1px rgba(0, 0, 0, .25), 0 2px 3px rgba(0, 0, 0, .1);
+
+    }
+    
+    .btnjs:active, .btnst:active{
+	    background-image: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#f6f6f6));
+	    background-image: -webkit-linear-gradient(top, #eaeaea, #f6f6f6);
+	    background-image: -moz-linear-gradient(top, #eaeaea, #f6f6f6); 
+	    background-image: -o-linear-gradient(top, #eaeaea, #f6f6f6);
+	    background-image: linear-gradient(top, #eaeaea, #f6f6f6);
+    }
+    
+   .btnjs:active, .btnstop:active {
+        border: 1px solid #bababa;
+	       }
+
+    .btnjs:hover {
+        border: 2px solid #bababa;
+    }
+
+    .btnface{
+        font-size: x-large;
+        border: groove 2px aliceblue;
+        padding: 2px 12px 5px 12px;
+        line-height: 0px;
+    }
+
+    .btnstop{
+        font-size: small;
+        background-color:firebrick;
+        border-top-width: 2px;
+        border-left-width: 2px;
+        border-top-style: groove;
+        border-right-style: groove;
+        border-bottom-style: groove;
+        border-left-style: groove;
+        border-top-color: aliceblue;
+        border-left-color: aliceblue;
+        padding: 2px 12px 5px 12px;
+        line-height: 0px;
+        cursor:default;
+    }
+
+
+    .btnimg {
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAAEW3a/2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+AKDQY6HSBov0wAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAylJREFUSMelVEtoE1EUPW8yiRWbmEwarJoiWGmpoAtRxK1QsVJcCYIbQXBTWkuhWi1VEQRXxYoLwUWp9qNuW2xqFoKItEjQ2vRDI01Ra2zz0SST1szEec9FO0kmmXzEuxnee/edc+65dx4A4M7Nm9eghmtsjAEAh6zgACAcDmd2bvf0XE3nc5q8YCgU0MDpQqpBAODZ4CCzWq3Yuh4hAHCru/s64TgKIHjn7t0BHgDq6uru2e12APACGNjEJGTrQzJE3NYmYyyjTV2kBfvm5o4IgqCuD6dPvB8/HlSFp3WqMfTkCbNnboEQ4j3d3Hw4v8ocPlVhXiIhGgLQrIvaRC6HgNLMmdvlcqysrHwwGo0KbzDsUz0FgN/JZGo9kVhVFCWa5lr2+Y5PTk1N2Wy2dGIwFPp+8dIlp163MO3x1D/t71/VbSMAPOzru/wzErGxTbcZpRT3ent7/0gS1SS+e/PmsyiKB9SW8DyPxqYmHoCiqZoxRnSU5PtIckzMa3Yhs3PXpaj1O6NrR5mIrKRGlsvgdrkmw6HQXpPJtKeystKgVms0GhH48eMbz/Pc+MREA3eqqenEtooKkp0EAKlUChazuSYai50bGh4W03wvRkZCFrO5Sl1LsoxAIHCopa1tVqPx/IULjkQiEeQ4DrIsw7+8vFtN0o3x0dGVB/fv7y9lFwBg8u3br36/v8ZsNuf7Swg4jgMhxHfm7NmD6tCowesBUkolxhhMJlPebKgTKKdSko7b+p0uNR4AYDAYyh8dQggBKY7J9KQXAUQpieRfhpsxlvub5YEVEFgQEKR0ySi7KYQQQrMeRb1frRAhf6Ora8fCwoKQkuU/KUrhdrtjiqLwpRQqlPJOp3PXgdpaplAKq8XCORyODQIAC7OzRz9NT7+ijAlC1kNbyKfs5smyjF/R6FpcFE+2tbfPa2R8eP++we/3v05KUrWjqgrFypZlGbF4PBiJRI51dHZ+Ldr9+ZmZQ4uLiy9/J5M1dkHQAEuShFg8vra+sdHY0trqLXecAABflpaOeTyeUUmWq7dXVEAUxW/RWKz5SkfHDP4nng8N1T9+9GhnObl/AQgqdZbz5HyFAAAAAElFTkSuQmCC");
+        background-repeat: no-repeat;
+        width:26px;
+        height:36px;
+    }
+
+    .divup{
+        -ms-transform: rotate(180deg); /* IE 9 */
+        -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+        transform: rotate(180deg);
+        margin-left: 6px;
+        margin-top: -12px;
+    }
+
+    .divleft{
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+        transform: rotate(90deg);
+        margin-top: 5px;
+    }
+
+    .divright{
+        -ms-transform: rotate(270deg); /* IE 9 */
+        -webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+        transform: rotate(270deg);
+        margin-left: 14px;
+        margin-bottom: 5px;
+    }
+
+    .divdown{
+       margin-left: 10px;
+       margin-top: 8px;
+    }
+
+    .btnsw{
+        margin:10px;
+    }
+
+    .row2{
+        clear:both;
+    }
+
+    .btnchk{ 
+        width: 64px;
+        height: 64px;
+        float:left;
+        margin:10px;
+        padding:2px;
+    }
+
+    .btnchk label {
+        display: block;
+        color: red;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        border-radius: 50%;
+	    background-color: #eaeaea;
+	    background-image: -webkit-gradient(linear, left top, left bottom, from(#f6f6f6), to(#eaeaea));
+	    background-image: -webkit-linear-gradient(top, #f6f6f6, #eaeaea);
+	    background-image: -moz-linear-gradient(top, #f6f6f6, #eaeaea); 
+	    background-image: -o-linear-gradient(top, #f6f6f6, #eaeaea);
+	    background-image: linear-gradient(top, #f6f6f6, #eaeaea);
+
+        box-shadow: 
+            0 3px 5px rgba(0,0,0,0.25),
+            inset 0 1px 0 rgba(255,255,255,0.3),
+            inset 0 -5px 5px rgba(100,100,100,0.1),
+            inset 0 5px 5px rgba(255,255,255,0.3);
+    }
+
+    .btnchk span {
+        margin-left: 25px;
+        line-height: 60px;
+        font-size: x-large;
+        font-weight: 600;
+
+    }
+
+    .btnchk:hover{
+      border-radius:50%;
+      background: #bababa;
+    }
+
+    .btnchk input:checked ~ label { 
+	    background: #eaeaea; 
+        top:2px;
+        color: #25c025;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#eaeaea), to(#f6f6f6));
+	    background-image: -webkit-linear-gradient(top, #eaeaea, #f6f6f6);
+	    background-image: -moz-linear-gradient(top, #eaeaea, #f6f6f6); 
+	    background-image: -o-linear-gradient(top, #eaeaea, #f6f6f6);
+	    background-image: linear-gradient(top, #eaeaea, #f6f6f6);
+        box-shadow:
+            0 3px 5px 1px rgba(0,0,0,0.1),
+            inset 0 1px 0 rgba(255,255,255,0.4),
+            0 0 10px 2px rgba(0, 210, 0, 0.5);
+    }
+
+    .btnchk input {
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        z-index: 100;
+        opacity: 0;
+        cursor:default;
+    }
+
+    .trhead th{
+        padding:5px;
+        background-color:#75decf;
+    }
+
+    .col1{
+        width:80px;
+    }
+
+    .col2{
+
+    }
+
+    .col3{
+
+    }
+
+    .col4{
+
+    }
+
+    .col5{
+        width: 200px;
+    }
+    
+    tr input{
+        width:92%;
+        margin:5px;
+    }
+
+    .phd{
+        line-height: 0px;
+        color: red;
+        font-weight: bold;
+    }
+
+    /* End of copy from theme.css file */
+
+</style>
+</head>
+
+<body>
+
+    <!-- Start of copy from the body.html file -->
+
+    <h1>Universal Control for Raspberry Pi</h1>
+    <p>Configuration Sheet will vary depending upon your project</p>
+
+
+    <div id="controlpanel">
+        <!--Start of Control Panel-->
+        <div id="controls">
+            <!--Control Buttons-->
+            <h2>Controls</h2>
+            <div id="btncnt">
+                <button class="btnjs" name="ButtonUp" id="btnUp" style="margin-left:75px; margin-top:10px;">
+                    <div class="btnimg divup"></div>
+                </button>
+
+                <p style="margin:0px;">
+                    <button class="btnjs" name="ButtonLeft" style="margin:0px 62px 0px 10px;">
+                        <div class="btnimg divleft"></div>
+                    </button>
+                    <button class="btnst" name="ButtonStop" id="btnstop">
+                        <div style="margin-top: -12px; margin-left: -2px;"><span class="btnstop"> </span></div>
+                    </button>
+                    <button class="btnjs" name="ButtonRight">
+                        <div class="btnimg divright"></div>
+                    </button>
+                </p>
+
+                <button class="btnjs" name="ButtonDown" style="margin-left:75px;">
+                    <div class="btnimg divdown"></div>
+                </button>
+            </div>
+
+            <div id="btnrange">
+                <h2>Range Setters</h2>
+                <div id="btnsc">
+                    <p>Range1: <input class="sldrclass" id="Slider1" type="range" /><span class="sltxt"></span></p>
+                    <p>Range2: <input class="sldrclass" id="Slider2" type="range" /><span class="sltxt"></span></p>
+                    <p>Range3: <input class="sldrclass" id="Slider3" type="range" /><span class="sltxt"></span></p>
+                </div>
+            </div>
+
+        </div> <!-- End of Control buttons-->
+
+        <div id="btnport">
+            <!--Start of Port Control Switches-->
+            <h2>Port Switches</h2>
+            <div id="btnioc">
+                <div id="btnsw">
+                    <div class="row1">
+                        <button class="btnjs btnsw" value="" name="Switch1"><span class="btnface">1</span></button>
+                        <button class="btnjs btnsw" value="" name="Switch2"><span class="btnface">2</span></button>
+                        <button class="btnjs btnsw" value="" name="Switch3"><span class="btnface">3</span></button>
+                    </div>
+                    <div class="row2">
+                        <button class="btnjs btnsw" value="" name="Switch4"><span class="btnface">4</span></button>
+                        <button class="btnjs btnsw" value="" name="Switch5"><span class="btnface">5</span></button>
+                        <button class="btnjs btnsw" value="" name="Switch6"><span class="btnface">6</span></button>
+                    </div>
+                </div>
+            </div>
+            <h2>Port Setter Switches</h2>
+            <div id="btnpss">
+                <div class="row1">
+                    <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter1"><label><span>1</span></label></div>
+                    <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter2"><label><span>2</span></label></div>
+                    <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter3"><label><span>3</span></label></div>
+                </div>
+                <div class="row2">
+                    <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter4"><label><span>4</span></label></div>
+                    <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter5"><label><span>5</span></label></div>
+                    <div class="btnchk"><input type="checkbox" class="btnin" name="PortSetter6"><label><span>6</span></label></div>
+                </div>
+            </div>
+
+        </div><!--End of Control Switches-->
+
+        <div #id="txtcnt">
+            <div id="txt">
+                <form method="post">
+                    <p>
+                        <span style="margin-left:10px;">Text1: </span><input type="text" name="TextToPi1" class="txtin" value="" />
+                        <span style="margin-left:10px;">Text2: </span><input type="text" name="TextToPi2" class="txtin" value="" />
+                        <span style="margin-left:10px;">
+                            <input type="submit" class="btnform" value="Submit" name="Submit" style="height:30px; line-height:10px;">
+                        </span>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <div id="logtxt">
+            <p>&nbsp;</p>
+            <p>Last Action: <span id="log"></span></p>
+        </div>
+    </div> <!--End of Control Panel-->
+    <!--Start of Configuration Panel-->
+    <div id="confpanel">
+        <h2>Configuration chart for the switches</h2>
+        <p>Values are hard-coded based on the project</p>
+        <p class="phd">Control Button Configuration</p>
+
+        <table id="conftbl">
+            <tbody>
+                <tr class="trhead">
+                    <th class="col1">Control</th>
+                    <th class="col2">Action</th>
+                    <th class="col3">Pi Port</th>
+                    <th class="col4">Value</th>
+                    <th class="col5">Remarks</th>
+                </tr>
+                <tr>
+                    <td>Up Button</td>
+                    <td>Clicked</td>
+                    <td>
+                        5 &amp; 25 Low<br />
+                        6 &amp; 16 High
+                    </td>
+                    <td>N/A</td>
+                    <td>Navigator Forward</td>
+                </tr>
+                <tr>
+                    <td>Down Button</td>
+                    <td>Clicked</td>
+                    <td>
+                        5 &amp; 25 High<br />
+                        6 &amp; 16 Low
+                    </td>
+                    <td>N/A</td>
+                    <td>Navigator Reverse</td>
+                </tr>
+                <tr>
+                    <td>Stop Button</td>
+                    <td>Clicked</td>
+                    <td>
+                        5 &amp; 25 Low<br />
+                        6 &amp; 16 Low
+                    </td>
+                    <td>N/A</td>
+                    <td>Navigator Stop</td>
+                </tr>
+                <tr>
+                    <td>Left Button</td>
+                    <td>Clicked</td>
+                    <td>
+                        5 &amp; 16 Low<br />
+                        6 &amp; 25 High
+                    </td>
+                    <td>N/A</td>
+                    <td>Navigator Left turn</td>
+                </tr>
+                <tr>
+                    <td>Right Button</td>
+                    <td>Clicked</td>
+                    <td>
+                        5 &amp; 16 High<br />
+                        6 &amp; 25 Low
+                    </td>
+                    <td>N/A</td>
+                    <td>Navigator Right turn</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="phd">Port Switches Configuration</p>
+        <table id="conftbl">
+            <tbody>
+                <tr class="trhead">
+                    <th class="col1">Control</th>
+                    <th class="col2">Action</th>
+                    <th class="col3">Pi Port</th>
+                    <th class="col4">Value</th>
+                    <th class="col5">Remarks</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Clicked</td>
+                    <td>9</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Clicked</td>
+                    <td>10</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Clicked</td>
+                    <td>11</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Clicked</td>
+                    <td>12</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Clicked</td>
+                    <td>14</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Clicked</td>
+                    <td>15</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="phd">Port Setters Configuration</p>
+        <table id="conftbl">
+            <tbody id="confport">
+                <tr class="trhead">
+                    <th class="col1">Control</th>
+                    <th class="col2">Action</th>
+                    <th class="col3">Pi Port</th>
+                    <th class="col4">Value</th>
+                    <th class="col5">Remarks</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Normal</td>
+                    <td>16</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Pressed</td>
+                    <td>16</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Normal</td>
+                    <td>18</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pressed</td>
+                    <td>18</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Normal</td>
+                    <td>19</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Pressed</td>
+                    <td>19</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Normal</td>
+                    <td>20</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Pressed</td>
+                    <td>20</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Normal</td>
+                    <td>21</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Pressed</td>
+                    <td>21</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Normal</td>
+                    <td>22</td>
+                    <td>Low</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Pressed</td>
+                    <td>22</td>
+                    <td>High</td>
+                    <td>Sample only</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="phd">Range configuration</p>
+        <table id="conftbl">
+            <tbody>
+                <tr class="trhead">
+                    <th class="col1">Control</th>
+                    <th class="col2">Low</th>
+                    <th class="col3">High</th>
+                    <th class="col3">Inc</th>
+                    <th class="col4">Port</th>
+                    <th class="col5">Remarks</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>100</td>
+                    <td>2</td>
+                    <td>12 &amp; 13</td>
+                    <td>Set Navigator Speed</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>20</td>
+                    <td>40</td>
+                    <td>0.5</td>
+                    <td>3</td>
+                    <td>Sample only</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>50</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>Sample only</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div> <!--End of Configuration Panel-->
+
+    <!-- End of copy from body.html file-->
+
+    <!--<p>
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAAEW3a/2AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+AKDQY6HSBov0wAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAylJREFUSMelVEtoE1EUPW8yiRWbmEwarJoiWGmpoAtRxK1QsVJcCYIbQXBTWkuhWi1VEQRXxYoLwUWp9qNuW2xqFoKItEjQ2vRDI01Ra2zz0SST1szEec9FO0kmmXzEuxnee/edc+65dx4A4M7Nm9eghmtsjAEAh6zgACAcDmd2bvf0XE3nc5q8YCgU0MDpQqpBAODZ4CCzWq3Yuh4hAHCru/s64TgKIHjn7t0BHgDq6uru2e12APACGNjEJGTrQzJE3NYmYyyjTV2kBfvm5o4IgqCuD6dPvB8/HlSFp3WqMfTkCbNnboEQ4j3d3Hw4v8ocPlVhXiIhGgLQrIvaRC6HgNLMmdvlcqysrHwwGo0KbzDsUz0FgN/JZGo9kVhVFCWa5lr2+Y5PTk1N2Wy2dGIwFPp+8dIlp163MO3x1D/t71/VbSMAPOzru/wzErGxTbcZpRT3ent7/0gS1SS+e/PmsyiKB9SW8DyPxqYmHoCiqZoxRnSU5PtIckzMa3Yhs3PXpaj1O6NrR5mIrKRGlsvgdrkmw6HQXpPJtKeystKgVms0GhH48eMbz/Pc+MREA3eqqenEtooKkp0EAKlUChazuSYai50bGh4W03wvRkZCFrO5Sl1LsoxAIHCopa1tVqPx/IULjkQiEeQ4DrIsw7+8vFtN0o3x0dGVB/fv7y9lFwBg8u3br36/v8ZsNuf7Swg4jgMhxHfm7NmD6tCowesBUkolxhhMJlPebKgTKKdSko7b+p0uNR4AYDAYyh8dQggBKY7J9KQXAUQpieRfhpsxlvub5YEVEFgQEKR0ySi7KYQQQrMeRb1frRAhf6Ora8fCwoKQkuU/KUrhdrtjiqLwpRQqlPJOp3PXgdpaplAKq8XCORyODQIAC7OzRz9NT7+ijAlC1kNbyKfs5smyjF/R6FpcFE+2tbfPa2R8eP++we/3v05KUrWjqgrFypZlGbF4PBiJRI51dHZ+Ldr9+ZmZQ4uLiy9/J5M1dkHQAEuShFg8vra+sdHY0trqLXecAABflpaOeTyeUUmWq7dXVEAUxW/RWKz5SkfHDP4nng8N1T9+9GhnObl/AQgqdZbz5HyFAAAAAElFTkSuQmCC">
+    </p>-->
+    <!-- css Notation bigger arrow 
+    /*background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAkCAYAAAHgPRqFAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB+AKDQQ0GiML0w8AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAABKRJREFUSMetVl1MU2cYfr6vPYUD7UyB0cUr41iysSUYyzAbS5xuZhrHhTcukJC4EbxQC+JuvNiNWYwxGW7LlGlIjLKsF3qxoRvG6H5IkALld0BgA2HhZik9nhJOTws9Pd+3CziVltMf2N6kSc95v/fved73/Y4FAFo8nsZ9VVV7+gcGRgAA3o4O/uD+fQ4AFAAopTCEAoAoigCA9hs3jiU0X1+5sivx0NLc3JB4SHJmCLnj9XKHwwFN09be/HD3LgcAYhzxdnRwp9MJADhSU0OSfRCCVHmu5Dy9Mi8/fy0OIWi7evXVRMzPL1xwLYVCHzLGEI/H6Tdtbe0EAPw+X7UkST0GGB8cPUpoqn+LxYJNVW5Mhq7954m8+cbMiEk95LdHj54uLy/vttlsAABd16EoCuiBQ4deFgRhyDipqipq6+ufu/i5s7P/jtebgCHJub+3t3pmdranqKhoQ5IcgiDg/cOHE2etG43YehncBFtzEozWMaks1QlNUZqYZInEOTfFMDWS9dLFi/mPHj92WgQBCwsLxWbVEELw3sGDrng8jtLSUppw+1Nn53BsdXWPKIqmGSqKAkmW3z515oxv04Gue/f8Kysrlcb4KIqCwOLibs/Zs/NZi/3l4UP/V62tZWa6pEifnT9/IrqyYuGcG8VzXdcRjUZ/bL95UzYlt7q6+jqlNG8jWlaLBb92d/sBmBuZQcyTW9ucJ2yVXGLC7DrhPJORKbHI1HsZhGcyImZ18Uw1IU3fIYuRWYuDZIM81bMZCdb6urpdsiyvzszOxtJx9UyWi97dv9/FGMMrZWURMjY0dGR0bKyruKgImqZBFMUkQ0opVldXwRhDTNP+OV5bu5NWuN0PysvL35JlGQUFBZsiMcZgtVqxtLQ0d7y2dmdS4YM+X+Xk1JT/JZcLjLEko6AkTZ9oaHjNFK1Rv989Nj4+6CotBeccuq4jGAxOftzY+EZGiKcnJvb2DwwMlRQXIxAIDH9y8qQ7p56Znph48/vbt31pCU+nGOzreycUCnUvBgLUZrMBhCRzyHniHeccoiiip7e34tLly3+Y+bOm7WrGeDwe1wileS/s2JEE6CYnVqvRpjynuTXpOIJcx219d205UIYONw1CKTUdvFwD5VSRwVOm/Zc2ULYM02S09UCMMbIljgjJiDPNhLuxlrLdCMTYcdvliKTOTpaG4NvhiK/9CM8BP24ktR3obIKgG5DwHKsilOppdV+2tjpKS0o+jeu6W5blSF5eHmG6zuwOx4sOu/2ApmnE6XRm3AyCICAWi2Fufr4LwLJxx+aLIn0myzO+vr4vEqn2P3lSvbi4eC20tFRht9u5vbCQGM5z/TwghIAxBlVVoUYic5FIpOGUx/O76UD6fb6qYDDYJkmSuzAlYLZmUMJhRKPRP9VIpO60xzOc0+QP9fe7A4HA9aAkVdrtdtgLCzfBRwiBrusIqyqi0eiUqqo1p5uanm5rxYyPjOxdWFj4VpKkKofDkbhTdV1HJBpFOBweVRTlWPO5c3//510GAH9NTrpnZmevSZK0z2KxIKZp/nA4/FFTS8s8/k/x+9Y+pL0dHa9/d+tWyVbt/wWsIkHJarjbOQAAAABJRU5ErkJggg==");*/
+    -->
+
+</body>
+</html>
+
+

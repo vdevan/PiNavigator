@@ -1,0 +1,51 @@
+﻿<meta charset="utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<title>PiWebServer</title>
+<script>
+ 
+    $(document).ready(function () {
+
+        $(".btnjs").click(function () {
+            var ran = Math.random();
+            var name = this.name;
+            $("#log").text(name + ": Clicked");
+            $.get("", { [name]: "Clicked_Action " + ran}, function (result) {
+                $("#retVal").text(result);
+            });
+        });
+
+        $(".btnst").click(function () {
+            var name = this.name;
+            var ran = Math.random();
+            $("#log").text(name + ": Clicked");
+            $.get("", { [name]: "Clicked_Action " + ran }, function (result) {
+                $("#retVal").text(result);
+            });
+        });
+
+        $(".btnin").click(function () {
+            var name = this.name;
+            var ran = Math.random();
+            var ckb = $("input[name=" + name + "]").is(':Checked') ? "Checked_Action " + ran : "UnChecked_Action " + ran;
+            $("#log").text(name + ckb);
+
+            //alternatively ->  ckb = $(".btnin::checked").length
+            $.get("", { [name]: ckb }, function (res) {
+                $("#retVal").text(res);
+            });
+        });
+
+        $(".sldrclass").click(function () {
+            var sl = this.id;
+            var val = $("#" + sl).val();
+            $("#" + sl).next().text(val);
+
+            $.get("", { [sl]: val }, function () {
+                $("#log").text(sl + " Value: " + val);
+            });
+
+        })
+
+    });
+    
+</script>
